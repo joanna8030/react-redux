@@ -5,7 +5,11 @@ import { hideModal, insertMember, updateMember, handleOnChange, handleRadioSelec
 
 
 let ModalDialog = ({ lgShow, hideModal, title, insertMember, member, handleOnChange, updateMember, handleRadioSelect }) => {
-  let inputId, inputName, inputAge, inputAddress, inputSex;
+  let inputId,
+    inputName,
+    inputAge,
+    inputAddress,
+    inputSex;
   const idFormInput = (title === 'New') ? (<input type='text' ref={input => inputId = input} />) : member.id;
 
   return (
@@ -16,13 +20,13 @@ let ModalDialog = ({ lgShow, hideModal, title, insertMember, member, handleOnCha
       <form>
         <Modal.Body>
           ID: {idFormInput} <br /><br />
-          Name: <input type='text' name='name' value={member.name} ref={input => { inputName = input }} onChange={(e) => handleOnChange('name', inputName.value)} /><br /><br />
-          Age: <input type='text' name='age' value={member.age} ref={input => { inputAge = input }} onChange={(e) => handleOnChange('age', inputAge.value)} /><br /><br />
-          Address: <input type='text' name='address' value={member.address} ref={input => { inputAddress = input }} onChange={(e) => handleOnChange('address', inputAddress.value)} /><br /><br />
-          <ButtonGroup name='sex' type='radio' value={member.sex} onChange={(e) => handleRadioSelect('sex',inputSex.value)} >
+          Name: <input type='text' name='name' value={member.name} ref={input => { inputName = input; }} onChange={() => handleOnChange('name', inputName.value)} /><br /><br />
+          Age: <input type='text' name='age' value={member.age} ref={input => { inputAge = input; }} onChange={() => handleOnChange('age', inputAge.value)} /><br /><br />
+          Address: <input type='text' name='address' value={member.address} ref={input => { inputAddress = input; }} onChange={() => handleOnChange('address', inputAddress.value)} /><br /><br />
+          <ButtonGroup name='sex' type='radio' value={member.sex} onChange={() => handleRadioSelect('sex', inputSex.value)} >
             {
               ['male', 'female'].map(sex =>
-                <Button key={sex} active={member.sex === sex} onClick={(e) => handleRadioSelect(sex)}>
+                <Button key={sex} active={member.sex === sex} onClick={() => handleRadioSelect(sex)}>
                   {sex}
                 </Button>
               )
@@ -33,8 +37,9 @@ let ModalDialog = ({ lgShow, hideModal, title, insertMember, member, handleOnCha
           <Button
             onClick={
               () => (title === 'New') ?
-              insertMember(inputId.value, inputName.value, inputAge.value, inputAddress.value, member.sex): updateMember(member.id, inputName.value, inputAge.value, inputAddress.value, member.sex)
-            }>Save
+              insertMember(inputId.value, inputName.value, inputAge.value, inputAddress.value, member.sex) : updateMember(member.id, inputName.value, inputAge.value, inputAddress.value, member.sex)
+            }>
+            Save
           </Button>
         </Modal.Footer>
       </form>
@@ -51,11 +56,11 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    hideModal: () => { dispatch(hideModal()) },
-    insertMember: (id, name, age, address, sex) => { dispatch(insertMember(id, name, age, address, sex)) },
-    updateMember: (id, name, age, address, sex) => { dispatch(updateMember(id, name, age, address, sex)) },
-    handleOnChange: (name, value) =>{ dispatch(handleOnChange(name, value)) },
-    handleRadioSelect: (sex) => {dispatch(handleRadioSelect(sex))}
+    hideModal: () => { dispatch(hideModal()); },
+    insertMember: (id, name, age, address, sex) => { dispatch(insertMember(id, name, age, address, sex)); },
+    updateMember: (id, name, age, address, sex) => { dispatch(updateMember(id, name, age, address, sex)); },
+    handleOnChange: (name, value) => { dispatch(handleOnChange(name, value)); },
+    handleRadioSelect: (sex) => { dispatch(handleRadioSelect(sex)); }
   };
 };
 
@@ -67,5 +72,8 @@ ModalDialog.propTypes = {
   hideModal: React.PropTypes.func,
   title: React.PropTypes.string,
   member: React.PropTypes.object,
-  insertMember: React.PropTypes.func
+  insertMember: React.PropTypes.func,
+  handleOnChange: React.PropTypes.func,
+  updateMember: React.PropTypes.func,
+  handleRadioSelect: React.PropTypes.func
 };

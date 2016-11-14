@@ -1,8 +1,6 @@
 import React from 'react';
 import { Table, thead, tr, th, tbody } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import Member from './member-row';
-import { insertMember } from '../actions';
 
 const MemberTable = ({ members }) => {
   return (

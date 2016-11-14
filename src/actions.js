@@ -1,6 +1,6 @@
 import * as actionType from './constants/actionTypes';
 
-//Modal control
+// Modal control
 export const showModal = (title, member) => {
   return {
     type: actionType.SHOW_MODAL,
@@ -17,7 +17,7 @@ export const hideModal = () => {
   };
 };
 
-//Data control
+// Data control
 export const insertMember = (id, name, age, address, sex) => {
   const addMember = {
     id: id,
@@ -55,7 +55,7 @@ export const updateMember = (id, name, age, address, sex) => {
   };
 };
 
-//Input OnChange
+// Input OnChange
 export const handleOnChange = (name, value) => {
   return {
     type: actionType.HandleOnChange,
