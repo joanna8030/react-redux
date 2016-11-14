@@ -5,37 +5,51 @@ import defaultMembers from './constants/states';
 const ModalReducer = (state = { lgShow: false, member: {} }, action) => {
   switch (action.type) {
     case actionType.SHOW_MODAL:
-      return Object.assign({}, state, {
-        lgShow: true,
-        title: action.title,
-        member: action.member
-      });
+      // return Object.assign({}, state, {
+      //   lgShow: true,
+      //   title: action.title,
+      //   member: action.member
+      // });
+      return { ...state, lgShow: true, title: action.title, member: action.member }
 
     case actionType.HIDE_MODAL:
     case actionType.ADD_MEMBER:
     case actionType.UPDATE_MEMBER:
-      return Object.assign({}, state, {
-        lgShow: false
-      });
+      // return Object.assign({}, state, {
+      //   lgShow: false
+      // });
+      return { ...state, lgShow: false }
 
     case actionType.HandleOnChange:
-      return Object.assign({}, state, {
-        member:
-        {
+      // return Object.assign({}, state, {
+      //   member:
+      //   {
+      //     id: state.member.id,
+      //     [action.dom_name]: action.value
+      //   }
+      // });
+      return { ...state,
+        member: {
           id: state.member.id,
           [action.dom_name]: action.value
         }
-      });
+      }
 
     case actionType.HandleRadioSelect:
-      return Object.assign({}, state,
-      {
-          member:
-          {
-            id: state.member.id,
-            sex: action.sex
-          }
-      });
+      // return Object.assign({}, state,
+      // {
+      //     member:
+      //     {
+      //       id: state.member.id,
+      //       sex: action.sex
+      //     }
+      // });
+      return { ...state,
+        member: {
+          id: state.member.id,
+          sex: action.sex
+        }
+      }
     default:
       return state;
   }
@@ -45,17 +59,17 @@ const OperationReducer = (state = { members: defaultMembers}, action) => {
   switch (action.type) {
     case actionType.DELETE_MEMBER:
       var filterMember = state.members.filter(member => member.id !== action.id);
-      return Object.assign({}, state, {
+      return { ...state,
         members: filterMember
-      });
+      }
 
     case actionType.ADD_MEMBER:
-      return Object.assign({}, state, {
+      return { ...state,
         members: [
           ...state.members,
           action.addMember
         ]
-       });
+       }
 
     case actionType.UPDATE_MEMBER:
       var filterMember = state.members.map((member) => {
@@ -69,9 +83,9 @@ const OperationReducer = (state = { members: defaultMembers}, action) => {
         }
         return _member;
       });
-      return Object.assign({}, state, {
+      return { ...state,
         members: filterMember
-      });
+      }
 
     default:
       return state;
