@@ -30,7 +30,6 @@ export const insertMember = (id, name, age, address, sex) => {
   return {
     type: actionType.ADD_MEMBER,
     addMember: addMember,
-    lgShow: false
   };
 };
 
@@ -61,7 +60,7 @@ export const handleOnChange = (name, value) => {
   return {
     type: actionType.HandleOnChange,
     dom_name: name,
-    value: value.target.value
+    value: value
   };
 };
 
