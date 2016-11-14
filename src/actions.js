@@ -29,7 +29,8 @@ export const insertMember = (id, name, age, address, sex) => {
   };
   return {
     type: actionType.ADD_MEMBER,
-    addMember: addMember
+    addMember: addMember,
+    lgShow: false
   };
 };
 
@@ -40,10 +41,33 @@ export const deleteMember = (id) => {
   };
 };
 
-export const updateMember = (id) => {
+export const updateMember = (id, name, age, address, sex) => {
+  const updateMember = {
+    id: id,
+    name: name,
+    age: age,
+    address: address,
+    sex: sex,
+    isUpdate: true
+  };
   return {
     type: actionType.UPDATE_MEMBER,
-    id: id,
-    isUpdate: true
+    updateMember: updateMember
+  };
+};
+
+//Input OnChange
+export const handleOnChange = (name, value) => {
+  return {
+    type: actionType.HandleOnChange,
+    dom_name: name,
+    value: value.target.value
+  };
+};
+
+export const handleRadioSelect = (sex) => {
+  return {
+    type: actionType.HandleRadioSelect,
+    sex: sex
   };
 };

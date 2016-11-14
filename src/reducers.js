@@ -10,16 +10,39 @@ const ModalReducer = (state = { lgShow: false, member: {} }, action) => {
         title: action.title,
         member: action.member
       });
+
     case actionType.HIDE_MODAL:
+    case actionType.ADD_MEMBER:
+    case actionType.UPDATE_MEMBER:
       return Object.assign({}, state, {
         lgShow: false
       });
+
+    case actionType.HandleOnChange:
+      return Object.assign({}, state,
+        {
+          member:
+          {
+            id: state.member.id,
+            [action.dom_name]: action.value
+          }
+      });
+
+      case actionType.HandleRadioSelect:
+        return Object.assign({}, state,
+          {
+            member:
+            {
+              id: state.member.id,
+              sex: action.sex
+            }
+        });
     default:
       return state;
   }
 };
 
-const OperationReducer = (state = { members: defaultMembers }, action) => {
+const OperationReducer = (state = { members: defaultMembers, lgShow: false }, action) => {
   switch (action.type) {
     case actionType.DELETE_MEMBER:
       var filterMember = state.members.filter(member => member.id !== action.id);
@@ -28,19 +51,26 @@ const OperationReducer = (state = { members: defaultMembers }, action) => {
       });
 
     case actionType.ADD_MEMBER:
-      // var addMember = state.members;
-      // addMember.push(action.addMember);
-      // return Object.assign({}, state, {
-      //   members: addMember
-      // });
       return Object.assign({}, state, {
         members: [
           ...state.members,
           action.addMember
-        ] });
+        ], lgShow: action.lgShow });
 
     case actionType.UPDATE_MEMBER:
+      var filterMember = state.members.map((member) => {
+        var _member = member;
+        if(_member.id === action.updateMember.id){
+          _member.name = action.updateMember.name;
+          _member.age = action.updateMember.age;
+          _member.address = action.updateMember.address;
+          _member.sex = action.updateMember.sex;
+          _member.isUpdate = action.updateMember.isUpdate;
+        }
+        return _member;
+      });
       return Object.assign({}, state, {
+        members: filterMember
       });
 
     default:

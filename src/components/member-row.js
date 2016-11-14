@@ -25,7 +25,8 @@ let Member = ({ showModal, deleteMember, id, name, age, address, sex, isUpdate }
         <Button onClick={() => deleteMember(id)}>Drop</Button>
       </td>
     </tr>
-); };
+  );
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -33,8 +34,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    showModal: (title, member) => { dispatch(showModal(title, member)) },
-    deleteMember: (id) => { dispatch(deleteMember(id)) }
+    showModal: (title, member) => { dispatch(showModal(title, member)); },
+    deleteMember: (id) => { dispatch(deleteMember(id)); }
   };
 };
 

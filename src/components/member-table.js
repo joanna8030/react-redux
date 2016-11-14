@@ -5,7 +5,6 @@ import Member from './member-row';
 import { insertMember } from '../actions';
 
 let MemberTable = ({ members }) => {
-  console.log(members);
   return (
     <Table responsive>
       <thead>
@@ -29,17 +28,7 @@ let MemberTable = ({ members }) => {
     );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    members: state.OperationReducer.members
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
 
-MemberTable = connect(mapStateToProps, mapDispatchToProps)(MemberTable);
 export default MemberTable;
 
 MemberTable.propTypes = {
