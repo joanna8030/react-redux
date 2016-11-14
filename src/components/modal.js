@@ -16,10 +16,10 @@ let ModalDialog = ({ lgShow, hideModal, title, insertMember, member, handleOnCha
       <form>
         <Modal.Body>
           ID: {idFormInput} <br /><br />
-          Name: <input type='text' name='name' value={member.name} ref={input => { inputName = input }} onChange={(e) => handleOnChange('name', e)} /><br /><br />
-          Age: <input type='text' name='age' value={member.age} ref={input => { inputAge = input }} onChange={(e) => handleOnChange('age', e)} /><br /><br />
-          Address: <input type='text' name='address' value={member.address} ref={input => { inputAddress = input }} onChange={(e) => handleOnChange('address', e)} /><br /><br />
-          <ButtonGroup name='sex' type='radio' value={member.sex} onChange={(e) => handleRadioSelect('sex',e)} >
+          Name: <input type='text' name='name' value={member.name} ref={input => { inputName = input }} onChange={(e) => handleOnChange('name', inputName.value)} /><br /><br />
+          Age: <input type='text' name='age' value={member.age} ref={input => { inputAge = input }} onChange={(e) => handleOnChange('age', inputAge.value)} /><br /><br />
+          Address: <input type='text' name='address' value={member.address} ref={input => { inputAddress = input }} onChange={(e) => handleOnChange('address', inputAddress.value)} /><br /><br />
+          <ButtonGroup name='sex' type='radio' value={member.sex} onChange={(e) => handleRadioSelect('sex',inputSex.value)} >
             {
               ['male', 'female'].map(sex =>
                 <Button key={sex} active={member.sex === sex} onClick={(e) => handleRadioSelect(sex)}>
