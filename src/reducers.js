@@ -19,30 +19,29 @@ const ModalReducer = (state = { lgShow: false, member: {} }, action) => {
       });
 
     case actionType.HandleOnChange:
-      return Object.assign({}, state,
+      return Object.assign({}, state, {
+        member:
         {
+          id: state.member.id,
+          [action.dom_name]: action.value
+        }
+      });
+
+    case actionType.HandleRadioSelect:
+      return Object.assign({}, state,
+      {
           member:
           {
             id: state.member.id,
-            [action.dom_name]: action.value
+            sex: action.sex
           }
       });
-
-      case actionType.HandleRadioSelect:
-        return Object.assign({}, state,
-          {
-            member:
-            {
-              id: state.member.id,
-              sex: action.sex
-            }
-        });
     default:
       return state;
   }
 };
 
-const OperationReducer = (state = { members: defaultMembers, lgShow: false }, action) => {
+const OperationReducer = (state = { members: defaultMembers}, action) => {
   switch (action.type) {
     case actionType.DELETE_MEMBER:
       var filterMember = state.members.filter(member => member.id !== action.id);
@@ -55,7 +54,8 @@ const OperationReducer = (state = { members: defaultMembers, lgShow: false }, ac
         members: [
           ...state.members,
           action.addMember
-        ], lgShow: action.lgShow });
+        ]
+       });
 
     case actionType.UPDATE_MEMBER:
       var filterMember = state.members.map((member) => {

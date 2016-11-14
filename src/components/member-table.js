@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Member from './member-row';
 import { insertMember } from '../actions';
 
-let MemberTable = ({ members }) => {
+const MemberTable = ({ members }) => {
   return (
     <Table responsive>
       <thead>
@@ -21,16 +21,16 @@ let MemberTable = ({ members }) => {
         {members.map(member =>
           <Member
             key={member.id}
-            {...member} />
+            {...member}
+          />
         )}
       </tbody>
     </Table>
     );
 };
 
-
 export default MemberTable;
 
 MemberTable.propTypes = {
-  members: React.PropTypes.Object
+  members: React.PropTypes.array
 };
