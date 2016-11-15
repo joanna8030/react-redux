@@ -39,6 +39,7 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react', 'stage-2'],
+          plugins: ['transform-decorators-legacy']
         },
       },
     ],
