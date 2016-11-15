@@ -5,15 +5,18 @@ import ModalDialog from '../components/modal';
 import { showModal } from '../actions';
 import MemberTable from '../components/member-table';
 
-let App = ({ showModal, lgShow, members }) => {
-  return (
-    <div>
-      <Button bsStyle='primary' onClick={() => showModal('New', {})} >New</Button>
-      <MemberTable members={members} />
-      <ModalDialog onHide={lgShow} />
-    </div>
-  );
-};
+// @connect(mapStateToProps, mapDispatchToProps)
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Button bsStyle='primary' onClick={() => this.props.showModal('New', {})} >New</Button>
+        <MemberTable members={this.props.members} showModal={() => this.props.showModal()} />
+        <ModalDialog onHide={this.props.lgShow} />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -21,14 +24,17 @@ const mapStateToProps = (state) => {
     lgShow: state.ModalReducer.lgShow
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    showModal: (title, {}) => { dispatch(showModal(title, {})) }
+    showModal: (title, {}) => { dispatch(showModal(title, {})); },
+    deleteMember: (title, {}) => { dispatch(deleteMember(title, {})); }
   };
 };
 
 App = connect(mapStateToProps, mapDispatchToProps)(App);
 export default App;
+
 App.propTypes = {
   showModal: React.PropTypes.func,
   lgShow: React.PropTypes.bool,
