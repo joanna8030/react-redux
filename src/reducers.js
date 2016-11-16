@@ -15,6 +15,7 @@ const ModalReducer = (state = { lgShow: false, member: {} }, action) => {
     case actionType.HandleOnChange:
       return { ...state,
         member: {
+          ...state.member,
           id: state.member.id,
           [action.dom_name]: action.value
         }
@@ -23,6 +24,7 @@ const ModalReducer = (state = { lgShow: false, member: {} }, action) => {
     case actionType.HandleRadioSelect:
       return { ...state,
         member: {
+          ...state.member,
           id: state.member.id,
           sex: action.sex
         }

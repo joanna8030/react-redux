@@ -1,46 +1,46 @@
 import React from 'react';
 import { Button, tr, td } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { deleteMember, showModal } from '../actions';
 
-let Member = ({ showModal, deleteMember, id, name, age, address, sex, isUpdate }) => {
-  const member = {
-    id: id,
-    name: name,
-    age: age,
-    address: address,
-    sex: sex,
-    isUpdate: isUpdate
-  };
+export default class Member extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleShowModal= this.handleShowModal.bind(this);
+    this.handleDeleteMember = this.handleDeleteMember.bind(this);
+  }
 
-  return (
-    <tr style={{ backgroundColor: (isUpdate === true) ? '#f1f442' : '' }}>
-      <td>{id}</td>
-      <td>{name}</td>
-      <td>{age}</td>
-      <td>{address}</td>
-      <td>{sex}</td>
-      <td>
-        <Button onClick={() => showModal('Update', member)}>Edit</Button>
-        <Button onClick={() => deleteMember(id)}>Drop</Button>
-      </td>
-    </tr>
-  );
+  handleShowModal() {
+    const member = {
+      id: this.props.id,
+      name: this.props.name,
+      age: this.props.age,
+      address: this.props.address,
+      sex: this.props.sex,
+      isUpdate: this.props.isUpdate
+    };
+    this.props.showModal('Update', member);
+  }
+  handleDeleteMember() {
+    this.props.deleteMember(this.props.id);
+  }
+  render() {
+    const { id, name, age, address, sex, isUpdate } = this.props;
+
+    return (
+      <tr style={{ backgroundColor: (isUpdate === true) ? '#f1f442' : '' }}>
+        <td>{id}</td>
+        <td>{name}</td>
+        <td>{age}</td>
+        <td>{address}</td>
+        <td>{sex}</td>
+        <td>
+          <Button onClick={this.handleShowModal}>Edit</Button>
+          <Button onClick={this.handleDeleteMember}>Drop</Button>
+        </td>
+      </tr>
+    );
+  }
+
 };
-
-const mapStateToProps = (state) => {
-  return {
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    showModal: (title, member) => { dispatch(showModal(title, member)); },
-    deleteMember: (id) => { dispatch(deleteMember(id)); }
-  };
-};
-
-Member = connect(mapStateToProps, mapDispatchToProps)(Member);
-export default Member;
 
 Member.propTypes = {
   showModal: React.PropTypes.func,

@@ -1,71 +1,63 @@
 import React from 'react';
 import { Modal, Button, form, ButtonGroup } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { hideModal, insertMember, updateMember, handleOnChange, handleRadioSelect } from '../actions';
 
+export default class ModalDialog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleOnChange= this.handleOnChange.bind(this);
+    this.handleRadioSelect= this.handleRadioSelect.bind(this);
+    this.insertMember= this.insertMember.bind(this);
+    this.updateMember= this.updateMember.bind(this);
+  }
+  handleOnChange(e){
+    this.props.handleOnChange(e.target.name, e.target.value);
+  }
+  handleRadioSelect(sex){
+    this.props.handleRadioSelect(sex);
+  }
+  insertMember(){
+    this.props.insertMember(this.inputId.value, this.props.member.name, this.props.member.age, this.props.member.address, this.props.member.sex);
+  }
+  updateMember(){
+    this.props.updateMember(this.props.member.id, this.props.member.name, this.props.member.age, this.props.member.address, this.props.member.sex);
+  }
+  render() {
+    const { member, lgShow, title} = this.props;
+    let inputId, inputName, inputAge, inputAddress, inputSex;
+    const idFormInput = (title === 'New') ? (<input type='text' ref={input => this.inputId = input} />) : this.props.member.id;
+    const insertOrUpdate = (title === 'New') ? this.insertMember : this.updateMember;
+    return (
+      <Modal show={lgShow} onHide={this.props.hideModal} bsSize='large' aria-labelledby='contained-modal-title-lg'>
+        <Modal.Header closeButton>
+          <Modal.Title id='contained-modal-title-lg'>{title}</Modal.Title>
+        </Modal.Header>
+        <form>
+          <Modal.Body>
+            ID: {idFormInput} <br /><br />
+            Name: <input type='text' name='name' value={member.name} ref={input => { inputName = input; }} onChange={this.handleOnChange} /><br /><br />
+            Age: <input type='text' name='age' value={member.age} ref={input => { inputAge = input; }} onChange={this.handleOnChange} /><br /><br />
+            Address: <input type='text' name='address' value={member.address} ref={input => { inputAddress = input; }} onChange={this.handleOnChange} /><br /><br />
+            <ButtonGroup name='sex' type='radio' value={member.sex} onChange={this.handleOnChange} >
+              {
+                ['male', 'female'].map(sex =>
+                  <Button key={sex} active={member.sex === sex} onClick={this.handleRadioSelect.bind(this, sex)}>
+                    {sex}
+                  </Button>
+                )
+              }
+            </ButtonGroup>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={insertOrUpdate} >
+              Save
+            </Button>
+          </Modal.Footer>
+        </form>
+      </Modal>
+    );
+  }
+}
 
-let ModalDialog = ({ lgShow, hideModal, title, insertMember, member, handleOnChange, updateMember, handleRadioSelect }) => {
-  let inputId,
-    inputName,
-    inputAge,
-    inputAddress,
-    inputSex;
-  const idFormInput = (title === 'New') ? (<input type='text' ref={input => inputId = input} />) : member.id;
-
-  return (
-    <Modal show={lgShow} onHide={() => hideModal()} bsSize='large' aria-labelledby='contained-modal-title-lg'>
-      <Modal.Header closeButton>
-        <Modal.Title id='contained-modal-title-lg'>{title}</Modal.Title>
-      </Modal.Header>
-      <form>
-        <Modal.Body>
-          ID: {idFormInput} <br /><br />
-          Name: <input type='text' name='name' value={member.name} ref={input => { inputName = input; }} onChange={() => handleOnChange('name', inputName.value)} /><br /><br />
-          Age: <input type='text' name='age' value={member.age} ref={input => { inputAge = input; }} onChange={() => handleOnChange('age', inputAge.value)} /><br /><br />
-          Address: <input type='text' name='address' value={member.address} ref={input => { inputAddress = input; }} onChange={() => handleOnChange('address', inputAddress.value)} /><br /><br />
-          <ButtonGroup name='sex' type='radio' value={member.sex} onChange={() => handleRadioSelect('sex', inputSex.value)} >
-            {
-              ['male', 'female'].map(sex =>
-                <Button key={sex} active={member.sex === sex} onClick={() => handleRadioSelect(sex)}>
-                  {sex}
-                </Button>
-              )
-            }
-          </ButtonGroup>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            onClick={
-              () => (title === 'New') ?
-              insertMember(inputId.value, inputName.value, inputAge.value, inputAddress.value, member.sex) : updateMember(member.id, inputName.value, inputAge.value, inputAddress.value, member.sex)
-            }>
-            Save
-          </Button>
-        </Modal.Footer>
-      </form>
-    </Modal>
-  );
-};
-
-const mapStateToProps = (state) => {
-  return {
-    lgShow: state.ModalReducer.lgShow,
-    title: state.ModalReducer.title,
-    member: state.ModalReducer.member
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    hideModal: () => { dispatch(hideModal()); },
-    insertMember: (id, name, age, address, sex) => { dispatch(insertMember(id, name, age, address, sex)); },
-    updateMember: (id, name, age, address, sex) => { dispatch(updateMember(id, name, age, address, sex)); },
-    handleOnChange: (name, value) => { dispatch(handleOnChange(name, value)); },
-    handleRadioSelect: (sex) => { dispatch(handleRadioSelect(sex)); }
-  };
-};
-
-ModalDialog = connect(mapStateToProps, mapDispatchToProps)(ModalDialog);
-export default ModalDialog;
 
 ModalDialog.propTypes = {
   lgShow: React.PropTypes.bool,
