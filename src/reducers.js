@@ -52,7 +52,7 @@ const OperationReducer = (state = { members: defaultMembers }, action) => {
       };
 
     case actionType.UPDATE_MEMBER:
-      var filterMember = state.members.map((member) => {
+      var members = state.members.map((member) => {
         var _member = member;
         if (_member.id === action.updateMember.id) {
           _member.name = action.updateMember.name;
@@ -64,7 +64,7 @@ const OperationReducer = (state = { members: defaultMembers }, action) => {
         return _member;
       });
       return { ...state,
-        members: filterMember
+        members: members
       };
 
     default:
