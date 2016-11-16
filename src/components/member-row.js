@@ -4,7 +4,7 @@ import { Button, tr, td } from 'react-bootstrap';
 export default class Member extends React.Component {
   constructor(props) {
     super(props);
-    this.handleShowModal= this.handleShowModal.bind(this);
+    this.handleShowModal = this.handleShowModal.bind(this);
     this.handleDeleteMember = this.handleDeleteMember.bind(this);
   }
 
@@ -40,7 +40,7 @@ export default class Member extends React.Component {
     );
   }
 
-};
+}
 
 Member.propTypes = {
   showModal: React.PropTypes.func,

@@ -36,9 +36,11 @@ const ModalReducer = (state = { lgShow: false, member: {} }, action) => {
 };
 
 const OperationReducer = (state = { members: defaultMembers }, action) => {
+  var filterMember;
+  var updateMembers;
   switch (action.type) {
     case actionType.DELETE_MEMBER:
-      var filterMember = state.members.filter(member => member.id !== action.id);
+      filterMember = state.members.filter(member => member.id !== action.id);
       return { ...state,
         members: filterMember
       };
@@ -52,7 +54,7 @@ const OperationReducer = (state = { members: defaultMembers }, action) => {
       };
 
     case actionType.UPDATE_MEMBER:
-      var members = state.members.map((member) => {
+      updateMembers = state.members.map((member) => {
         var _member = member;
         if (_member.id === action.updateMember.id) {
           _member.name = action.updateMember.name;
@@ -64,7 +66,7 @@ const OperationReducer = (state = { members: defaultMembers }, action) => {
         return _member;
       });
       return { ...state,
-        members: members
+        members: updateMembers
       };
 
     default:

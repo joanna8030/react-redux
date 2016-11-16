@@ -21,7 +21,7 @@ class App extends React.Component {
           updateMember={this.props.updateMember}
           handleOnChange={this.props.handleOnChange}
           handleRadioSelect={this.props.handleRadioSelect}
-         />
+        />
       </div>
     );
   }

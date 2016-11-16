@@ -5,14 +5,14 @@ import Member from './member-row';
 export default class MemberTable extends React.Component {
   constructor(props) {
     super(props);
-    this.handleShowModal= this.handleShowModal.bind(this);
+    this.handleShowModal = this.handleShowModal.bind(this);
     this.handleDeleteMember = this.handleDeleteMember.bind(this);
   }
 
-  handleShowModal(title, member){
+  handleShowModal(title, member) {
     this.props.showModal(title, member);
   }
-  handleDeleteMember(id){
+  handleDeleteMember(id) {
     this.props.deleteMember(id);
   }
   render() {
@@ -41,8 +41,10 @@ export default class MemberTable extends React.Component {
       </Table>
       );
   }
-};
+}
 
 MemberTable.propTypes = {
-  members: React.PropTypes.array
+  members: React.PropTypes.array,
+  showModal: React.PropTypes.func,
+  deleteMember: React.PropTypes.func
 };

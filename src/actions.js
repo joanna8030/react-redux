@@ -41,7 +41,7 @@ export const deleteMember = (id) => {
 };
 
 export const updateMember = (id, name, age, address, sex) => {
-  const updateMember = {
+  const modifiedMember = {
     id: id,
     name: name,
     age: age,
@@ -51,7 +51,7 @@ export const updateMember = (id, name, age, address, sex) => {
   };
   return {
     type: actionType.UPDATE_MEMBER,
-    updateMember: updateMember
+    updateMember: modifiedMember
   };
 };
 

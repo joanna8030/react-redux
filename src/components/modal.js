@@ -4,26 +4,25 @@ import { Modal, Button, form, ButtonGroup } from 'react-bootstrap';
 export default class ModalDialog extends React.Component {
   constructor(props) {
     super(props);
-    this.handleOnChange= this.handleOnChange.bind(this);
-    this.handleRadioSelect= this.handleRadioSelect.bind(this);
-    this.insertMember= this.insertMember.bind(this);
-    this.updateMember= this.updateMember.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleRadioSelect = this.handleRadioSelect.bind(this);
+    this.insertMember = this.insertMember.bind(this);
+    this.updateMember = this.updateMember.bind(this);
   }
-  handleOnChange(e){
+  handleOnChange(e) {
     this.props.handleOnChange(e.target.name, e.target.value);
   }
-  handleRadioSelect(sex){
+  handleRadioSelect(sex) {
     this.props.handleRadioSelect(sex);
   }
-  insertMember(){
+  insertMember() {
     this.props.insertMember(this.inputId.value, this.props.member.name, this.props.member.age, this.props.member.address, this.props.member.sex);
   }
-  updateMember(){
+  updateMember() {
     this.props.updateMember(this.props.member.id, this.props.member.name, this.props.member.age, this.props.member.address, this.props.member.sex);
   }
   render() {
-    const { member, lgShow, title} = this.props;
-    let inputId, inputName, inputAge, inputAddress, inputSex;
+    const { member, lgShow, title } = this.props;
     const idFormInput = (title === 'New') ? (<input type='text' ref={input => this.inputId = input} />) : this.props.member.id;
     const insertOrUpdate = (title === 'New') ? this.insertMember : this.updateMember;
     return (
@@ -34,9 +33,9 @@ export default class ModalDialog extends React.Component {
         <form>
           <Modal.Body>
             ID: {idFormInput} <br /><br />
-            Name: <input type='text' name='name' value={member.name} ref={input => { inputName = input; }} onChange={this.handleOnChange} /><br /><br />
-            Age: <input type='text' name='age' value={member.age} ref={input => { inputAge = input; }} onChange={this.handleOnChange} /><br /><br />
-            Address: <input type='text' name='address' value={member.address} ref={input => { inputAddress = input; }} onChange={this.handleOnChange} /><br /><br />
+            Name: <input type='text' name='name' value={member.name} onChange={this.handleOnChange} /><br /><br />
+            Age: <input type='text' name='age' value={member.age} onChange={this.handleOnChange} /><br /><br />
+            Address: <input type='text' name='address' value={member.address} onChange={this.handleOnChange} /><br /><br />
             <ButtonGroup name='sex' type='radio' value={member.sex} onChange={this.handleOnChange} >
               {
                 ['male', 'female'].map(sex =>
