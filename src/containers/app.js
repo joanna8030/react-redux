@@ -52,8 +52,15 @@ App = connect(mapStateToProps, mapDispatchToProps)(App);
 export default App;
 
 App.propTypes = {
-  showModal: React.PropTypes.func,
   lgShow: React.PropTypes.bool,
   members: React.PropTypes.array,
-  deleteMember: React.PropTypes.func
+  title: React.PropTypes.string,
+  member: React.PropTypes.object,
+  showModal: React.PropTypes.func,
+  hideModal: React.PropTypes.func,
+  deleteMember: React.PropTypes.func,
+  insertMember: React.PropTypes.func,
+  updateMember: React.PropTypes.func,
+  handleOnChange: React.PropTypes.func,
+  handleRadioSelect: React.PropTypes.func
 };
