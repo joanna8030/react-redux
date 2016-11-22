@@ -46,6 +46,12 @@ const OperationReducer = (state = { members: defaultMembers }, action) => {
       };
 
     case actionType.ADD_MEMBER:
+      state.members.filter((member) => {
+        if (member.id === action.addMember.id){
+          document.getElementById('warning').removeAttribute('hidden');
+          return { ...state, lgShow: show };
+        }
+      });
       return { ...state,
         members: [
           ...state.members,
