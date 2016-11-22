@@ -1,3 +1,4 @@
+/* eslint no-undef: 0 */
 import { combineReducers } from 'redux';
 import * as actionType from './constants/actionTypes';
 import defaultMembers from './constants/states';
@@ -47,10 +48,11 @@ const OperationReducer = (state = { members: defaultMembers }, action) => {
 
     case actionType.ADD_MEMBER:
       state.members.filter((member) => {
-        if (member.id === action.addMember.id){
+        if (member.id === action.addMember.id) {
           document.getElementById('warning').removeAttribute('hidden');
           return { ...state, lgShow: show };
         }
+        return member;
       });
       return { ...state,
         members: [
