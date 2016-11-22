@@ -32,14 +32,14 @@ export default class ModalDialog extends React.Component {
         </Modal.Header>
         <form>
           <Modal.Body>
-            ID: {idFormInput} <br /><br />
+            ID: {idFormInput} <span id='warning' hidden>id should be unique!</span><br /><br />
             Name: <input type='text' name='name' value={member.name} onChange={this.handleOnChange} /><br /><br />
             Age: <input type='text' name='age' value={member.age} onChange={this.handleOnChange} /><br /><br />
             Address: <input type='text' name='address' value={member.address} onChange={this.handleOnChange} /><br /><br />
             <ButtonGroup name='sex' type='radio' value={member.sex} onChange={this.handleOnChange} >
               {
                 ['male', 'female'].map(sex =>
-                  <Button key={sex} active={member.sex === sex} onClick={this.handleRadioSelect.bind(this, sex)}>
+                  <Button key={sex} active={member.sex === sex} onClick={() => this.handleRadioSelect(sex)}>
                     {sex}
                   </Button>
                 )
