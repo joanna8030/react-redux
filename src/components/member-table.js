@@ -39,7 +39,7 @@ export default class MemberTable extends React.Component {
           )}
         </tbody>
       </Table>
-      );
+    );
   }
 }
 
