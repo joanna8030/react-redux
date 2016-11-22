@@ -1,3 +1,4 @@
+/* eslint arrow-body-style: 0 */
 import * as actionType from './constants/actionTypes';
 
 // Modal control

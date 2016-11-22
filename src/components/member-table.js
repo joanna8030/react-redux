@@ -1,3 +1,5 @@
+/* eslint react/no-unused-prop-types: 0 */
+/* eslint react/forbid-prop-types: 0 */
 import React from 'react';
 import { Table, thead, tr, th, tbody } from 'react-bootstrap';
 import Member from './member-row';
