@@ -10,7 +10,7 @@ export default class ModalDialog extends React.Component {
     this.updateMember = this.updateMember.bind(this);
   }
   handleOnChange(e) {
-    this.props.handleOnChange(e.target.name, e.target.value);
+    this.props.onChange(e.target.name, e.target.value);
   }
   handleRadioSelect(sex) {
     this.props.handleRadioSelect(sex);
@@ -62,9 +62,15 @@ ModalDialog.propTypes = {
   lgShow: React.PropTypes.bool,
   hideModal: React.PropTypes.func,
   title: React.PropTypes.string,
-  member: React.PropTypes.object,
+  member: React.PropTypes.shape({
+    id: React.PropTypes.string,
+    name: React.PropTypes.string,
+    age: React.PropTypes.string,
+    address: React.PropTypes.string,
+    sex: React.PropTypes.string
+  }),
   insertMember: React.PropTypes.func,
-  handleOnChange: React.PropTypes.func,
+  onChange: React.PropTypes.func,
   updateMember: React.PropTypes.func,
   handleRadioSelect: React.PropTypes.func
 };

@@ -1,3 +1,6 @@
+/* eslint react/no-unused-prop-types: 0 */
+/* eslint no-class-assign: 0 */
+/* eslint arrow-body-style: 0 */
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -19,7 +22,7 @@ class App extends React.Component {
           hideModal={this.props.hideModal}
           insertMember={this.props.insertMember}
           updateMember={this.props.updateMember}
-          handleOnChange={this.props.handleOnChange}
+          onChange={this.props.handleOnChange}
           handleRadioSelect={this.props.handleRadioSelect}
         />
       </div>
@@ -53,9 +56,22 @@ export default App;
 
 App.propTypes = {
   lgShow: React.PropTypes.bool,
-  members: React.PropTypes.array,
+  members: React.PropTypes.shape({
+    id: React.PropTypes.string,
+    name: React.PropTypes.string,
+    age: React.PropTypes.string,
+    address: React.PropTypes.string,
+    sex: React.PropTypes.string,
+    isUpdate: React.PropTypes.bool
+  }),
   title: React.PropTypes.string,
-  member: React.PropTypes.object,
+  member: React.PropTypes.shape({
+    id: React.PropTypes.string,
+    name: React.PropTypes.string,
+    age: React.PropTypes.string,
+    address: React.PropTypes.string,
+    sex: React.PropTypes.string
+  }),
   showModal: React.PropTypes.func,
   hideModal: React.PropTypes.func,
   deleteMember: React.PropTypes.func,
